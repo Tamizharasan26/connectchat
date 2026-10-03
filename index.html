@@ -1,0 +1,18 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ConnectChat</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<div id="auth" class="center"><div class="card auth">
+<h1>ConnectChat</h1><p>Real-time chat, groups, files and live rooms</p>
+<div class="tabs"><button id="lt" class="active">Login</button><button id="rt">Register</button></div>
+<form id="af"><input id="email" type="email" placeholder="Email" required><input id="username" placeholder="Username" class="hidden"><input id="password" type="password" placeholder="Password (8+ characters)" required><button>Continue</button></form><div id="err"></div>
+</div></div>
+<div id="app" class="hidden layout">
+<aside><div class="brand">ConnectChat <button id="logout">↪</button></div><div id="me" class="card"></div>
+<div class="actions"><button id="chatBtn">＋ Chat</button><button id="groupBtn">＋ Group</button><button id="roomBtn">🔴 Room</button></div>
+<input id="search" placeholder="Search users"><div id="users"></div><button id="roomsBtn">🔴 Live Rooms</button><button id="adminBtn" class="hidden">🛡️ Admin</button></aside>
+<main><header id="head"><b>Select a chat</b><small>Choose a user</small></header><section id="msgs"><div class="empty">Start a conversation.</div></section>
+<form id="send" class="hidden"><input id="file" type="file"><input id="text" placeholder="Message..."><button>➤</button></form></main>
+</div>
+<div id="modal" class="hidden modal"><div class="modalbox"><button class="x" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<script src="/socket.io/socket.io.js"></script><script src="/app.js"></script></body></html>
