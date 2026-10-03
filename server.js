@@ -1,4 +1,4 @@
-require("dotenv").config();
+ife("dotenv").config();
 const express=require("express");
 const http=require("http");
 const path=require("path");
@@ -68,7 +68,7 @@ async function init(){
    const x=await pool.query("SELECT id FROM users WHERE email=$1",[email]);
    if(!x.rowCount){
      const hash=await bcrypt.hash(process.env.ADMIN_PASSWORD,12);
-  if let name="Admin";
+  let name="Admin";
      if((await pool.query("SELECT 1 FROM users WHERE username=$1",[name])).rowCount)name="Admin_"+crypto.randomBytes(3).toString("hex");
      await pool.query("INSERT INTO users(email,username,password_hash,role) VALUES($1,$2,$3,'admin')",[email,name,hash]);
      console.log("Admin account created");
