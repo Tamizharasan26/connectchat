@@ -37,7 +37,7 @@ async function init(){
   id SERIAL PRIMARY KEY,email TEXT UNIQUE NOT NULL,username TEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,bio TEXT DEFAULT '',avatar_data BYTEA,avatar_mime TEXT,
   role TEXT NOT NULL DEFAULT 'user',created_at TIMESTAMPTZ DEFAULT NOW(),last_seen TIMESTAMPTZ DEFAULT NOW()
- );
+   );
  CREATE TABLE IF NOT EXISTS conversations(
   id SERIAL PRIMARY KEY,kind TEXT NOT NULL DEFAULT 'direct',name TEXT,
   created_by INTEGER REFERENCES users(id) ON DELETE SET NULL,created_at TIMESTAMPTZ DEFAULT NOW()
@@ -62,12 +62,13 @@ async function init(){
  );
  CREATE INDEX IF NOT EXISTS msg_conv_idx ON messages(conversation_id,created_at);
  `);
+  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url TEXT`);
  if(process.env.ADMIN_EMAIL&&process.env.ADMIN_PASSWORD){
    const email=process.env.ADMIN_EMAIL.toLowerCase();
    const x=await pool.query("SELECT id FROM users WHERE email=$1",[email]);
    if(!x.rowCount){
      const hash=await bcrypt.hash(process.env.ADMIN_PASSWORD,12);
-     let name="Admin";
+  if let name="Admin";
      if((await pool.query("SELECT 1 FROM users WHERE username=$1",[name])).rowCount)name="Admin_"+crypto.randomBytes(3).toString("hex");
      await pool.query("INSERT INTO users(email,username,password_hash,role) VALUES($1,$2,$3,'admin')",[email,name,hash]);
      console.log("Admin account created");
